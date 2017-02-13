@@ -9,11 +9,9 @@ import java.sql.SQLException;
 
 import static junit.framework.Assert.assertEquals;
 
-public class BareBankServiceTest extends BankFixture
-{
+public class BareBankServiceTest extends BankFixture {
     @Test
-    public void transferSuccess() throws SQLException
-    {
+    public void transferSuccess() throws SQLException {
         TransactionEnabledProxyManager transactionEnabledProxyManager = new TransactionEnabledProxyManager(new TransactionManager(dataSource));
         Object bankService = new BareBankService(dataSource);
         BankService proxyBankService = (BankService) transactionEnabledProxyManager.proxyFor(bankService);
@@ -25,8 +23,7 @@ public class BareBankServiceTest extends BankFixture
     }
 
     @Test
-    public void transferFailure() throws SQLException
-    {
+    public void transferFailure() throws SQLException {
         TransactionEnabledProxyManager transactionEnabledProxyManager = new TransactionEnabledProxyManager(new TransactionManager(dataSource));
         Object bankService = new BareBankService(dataSource);
         BankService proxyBankService = (BankService) transactionEnabledProxyManager.proxyFor(bankService);
