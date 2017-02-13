@@ -7,12 +7,10 @@ import java.sql.SQLException;
 
 import static junit.framework.Assert.assertEquals;
 
-public class ConnectionHolderBankServiceTest extends BankFixture
-{
+public class ConnectionHolderBankServiceTest extends BankFixture {
 
     @Test
-    public void transferSuccess() throws SQLException
-    {
+    public void transferSuccess() throws SQLException {
         ConnectionHolderBankService connectionHolderBankService = new ConnectionHolderBankService(dataSource);
         connectionHolderBankService.transfer(1111, 2222, 200);
 
@@ -22,8 +20,7 @@ public class ConnectionHolderBankServiceTest extends BankFixture
     }
 
     @Test
-    public void transferFailure() throws SQLException
-    {
+    public void transferFailure() throws SQLException {
         ConnectionHolderBankService connectionHolderBankService = new ConnectionHolderBankService(dataSource);
 
         int toNonExistId = 3333;

@@ -13,12 +13,10 @@ import java.sql.SQLException;
  * Time: 8:20 PM
  * To change this template use File | Settings | File Templates.
  */
-public class ConnectionHolderInsuranceDao
-{
+public class ConnectionHolderInsuranceDao {
     private DataSource dataSource;
 
-    public ConnectionHolderInsuranceDao(DataSource dataSource)
-    {
+    public ConnectionHolderInsuranceDao(DataSource dataSource) {
         this.dataSource = dataSource;
     }
 

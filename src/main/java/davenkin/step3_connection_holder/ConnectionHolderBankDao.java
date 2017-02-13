@@ -13,17 +13,14 @@ import java.sql.SQLException;
  * Time: 8:20 PM
  * To change this template use File | Settings | File Templates.
  */
-public class ConnectionHolderBankDao
-{
+public class ConnectionHolderBankDao {
     private DataSource dataSource;
 
-    public ConnectionHolderBankDao(DataSource dataSource)
-    {
+    public ConnectionHolderBankDao(DataSource dataSource) {
         this.dataSource = dataSource;
     }
 
-    public void withdraw(int bankId, int amount) throws SQLException
-    {
+    public void withdraw(int bankId, int amount) throws SQLException {
         Connection connection = SingleThreadConnectionHolder.getConnection(dataSource);
         PreparedStatement selectStatement = connection.prepareStatement("SELECT BANK_AMOUNT FROM BANK_ACCOUNT WHERE BANK_ID = ?");
         selectStatement.setInt(1, bankId);
