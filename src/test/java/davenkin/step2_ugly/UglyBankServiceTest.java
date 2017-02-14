@@ -25,7 +25,7 @@ public class UglyBankServiceTest extends BankFixture {
         bankService.setUglyBankDao(failureBankDao);
         bankService.setUglyInsuranceDao(failureInsuranceDao);
 
-        bankService.transfer(1111, 2222,200);
+        bankService.transfer(1111, 2222, 200);
 
         assertEquals(800, getBankAmount(1111));
         assertEquals(1200, getInsuranceAmount(2222));
@@ -41,9 +41,9 @@ public class UglyBankServiceTest extends BankFixture {
         bankService.setUglyInsuranceDao(failureInsuranceDao);
 
         int toNonExistId = 3333;
-        bankService.transfer(1111, toNonExistId,200);
+        bankService.transfer(1111, toNonExistId, 200);
 
-        assertEquals(1000,getBankAmount(1111));
+        assertEquals(1000, getBankAmount(1111));
         assertEquals(1000, getInsuranceAmount(2222));
     }
 

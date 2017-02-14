@@ -14,11 +14,9 @@ import static junit.framework.Assert.assertEquals;
  * Time: 10:08 PM
  * To change this template use File | Settings | File Templates.
  */
-public class FailureBankServiceTest extends BankFixture
-{
+public class FailureBankServiceTest extends BankFixture {
     @Test
-    public void transferSuccess() throws SQLException
-    {
+    public void transferSuccess() throws SQLException {
         FailureBankDao failureBankDao = new FailureBankDao(dataSource);
         FailureInsuranceDao failureInsuranceDao = new FailureInsuranceDao(dataSource);
 
@@ -34,8 +32,7 @@ public class FailureBankServiceTest extends BankFixture
     }
 
     @Test
-    public void transferFailure() throws SQLException
-    {
+    public void transferFailure() throws SQLException {
         FailureBankDao failureBankDao = new FailureBankDao(dataSource);
         FailureInsuranceDao failureInsuranceDao = new FailureInsuranceDao(dataSource);
 

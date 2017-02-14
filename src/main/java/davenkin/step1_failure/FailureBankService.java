@@ -13,7 +13,7 @@ import java.sql.SQLException;
  * Time: 10:07 PM
  * To change this template use File | Settings | File Templates.
  */
-public class FailureBankService implements BankService{
+public class FailureBankService implements BankService {
     private FailureBankDao failureBankDao;
     private FailureInsuranceDao failureInsuranceDao;
     private DataSource dataSource;
@@ -40,12 +40,10 @@ public class FailureBankService implements BankService{
                 e1.printStackTrace();
             }
         } finally {
-            try
-            {
+            try {
                 assert connection != null;
                 connection.close();
-            } catch (SQLException e)
-            {
+            } catch (SQLException e) {
                 e.printStackTrace();
             }
         }

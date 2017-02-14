@@ -40,12 +40,10 @@ public class UglyBankService implements BankService {
                 e1.printStackTrace();
             }
         } finally {
-            try
-            {
+            try {
                 assert connection != null;
                 connection.close();
-            } catch (SQLException e)
-            {
+            } catch (SQLException e) {
                 e.printStackTrace();
             }
         }
