@@ -22,9 +22,9 @@ public class BareBankServiceTest extends BankFixture {
     @Test
     public void transferSuccess() throws SQLException {
         TransactionManager transactionManager = new TransactionManager(dataSource);
-        ProxyEnabledTransactionManager proxyEnabledTransactionManager = new ProxyEnabledTransactionManager(transactionManager);
+        TransactionManagerEnabledProxy transactionManagerEnabledProxy = new TransactionManagerEnabledProxy(transactionManager);
         BareBankService bankService = new BareBankService(dataSource);
-        BankService proxyBankService = (BankService) proxyEnabledTransactionManager.proxyFor(bankService);
+        BankService proxyBankService = (BankService) transactionManagerEnabledProxy.proxyFor(bankService);
         proxyBankService.transfer(1111, 2222, 200);
 
         assertEquals(800, getBankAmount(1111));
@@ -34,9 +34,10 @@ public class BareBankServiceTest extends BankFixture {
 
     @Test
     public void transferFailure() throws SQLException {
-        ProxyEnabledTransactionManager proxyEnabledTransactionManager = new ProxyEnabledTransactionManager(new TransactionManager(dataSource));
+        TransactionManager transactionManager = new TransactionManager(dataSource);
+        TransactionManagerEnabledProxy transactionManagerEnabledProxy = new TransactionManagerEnabledProxy(transactionManager);
         Object bankService = new BareBankService(dataSource);
-        BankService proxyBankService = (BankService) proxyEnabledTransactionManager.proxyFor(bankService);
+        BankService proxyBankService = (BankService) transactionManagerEnabledProxy.proxyFor(bankService);
 
         int toNonExistId = 3333;
         proxyBankService.transfer(1111, toNonExistId, 200);
