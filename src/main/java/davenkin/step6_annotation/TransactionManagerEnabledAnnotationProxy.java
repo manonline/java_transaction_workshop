@@ -6,10 +6,10 @@ import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 
-public class TransactionEnabledAnnotationProxyManager {
+public class TransactionManagerEnabledAnnotationProxy {
     private TransactionManager transactionManager;
 
-    public TransactionEnabledAnnotationProxyManager(TransactionManager transactionManager) {
+    public TransactionManagerEnabledAnnotationProxy(TransactionManager transactionManager) {
 
         this.transactionManager = transactionManager;
     }

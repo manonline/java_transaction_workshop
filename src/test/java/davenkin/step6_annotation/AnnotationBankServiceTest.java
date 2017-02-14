@@ -13,9 +13,9 @@ public class AnnotationBankServiceTest extends BankFixture {
     @Test
     public void transferSuccess() throws SQLException {
         TransactionManager transactionManager = new TransactionManager(dataSource);
-        TransactionEnabledAnnotationProxyManager transactionEnabledProxyManager = new TransactionEnabledAnnotationProxyManager(transactionManager);
+        TransactionManagerEnabledAnnotationProxy transactionManagerEnabledProxy = new TransactionManagerEnabledAnnotationProxy(transactionManager);
         BankService bankService = new AnnotationBankService(dataSource);
-        BankService proxyBankService = (BankService) transactionEnabledProxyManager.proxyFor(bankService);
+        BankService proxyBankService = (BankService) transactionManagerEnabledProxy.proxyFor(bankService);
         proxyBankService.transfer(1111, 2222, 200);
 
         assertEquals(800, getBankAmount(1111));
@@ -24,9 +24,10 @@ public class AnnotationBankServiceTest extends BankFixture {
 
     @Test
     public void transferFailure() throws SQLException {
-        TransactionEnabledAnnotationProxyManager transactionEnabledAnnotationProxyManager = new TransactionEnabledAnnotationProxyManager(new TransactionManager(dataSource));
+        TransactionManager transactionManager = new TransactionManager(dataSource);
+        TransactionManagerEnabledAnnotationProxy transactionManagerEnabledProxy = new TransactionManagerEnabledAnnotationProxy(transactionManager);
         BankService bankService = new AnnotationBankService(dataSource);
-        BankService proxyBankService = (BankService) transactionEnabledAnnotationProxyManager.proxyFor(bankService);
+        BankService proxyBankService = (BankService) transactionManagerEnabledProxy.proxyFor(bankService);
 
         int toNonExistId = 3333;
         proxyBankService.transfer(1111, toNonExistId, 200);
