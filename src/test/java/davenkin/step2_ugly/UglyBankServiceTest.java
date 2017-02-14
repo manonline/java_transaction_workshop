@@ -13,6 +13,9 @@ import static junit.framework.Assert.assertEquals;
  * Date: 2/7/13
  * Time: 8:23 PM
  * To change this template use File | Settings | File Templates.
+ * =========================================================================================================
+ * 通过参数来在不同的方法间传递connection对象。
+ * =========================================================================================================
  */
 public class UglyBankServiceTest extends BankFixture {
 

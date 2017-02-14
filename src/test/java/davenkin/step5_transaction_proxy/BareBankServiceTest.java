@@ -8,13 +8,23 @@ import org.junit.Test;
 import java.sql.SQLException;
 
 import static junit.framework.Assert.assertEquals;
-
+/**
+ * Created with IntelliJ IDEA.
+ * User: davenkin
+ * Date: 2/7/13
+ * Time: 8:23 PM
+ * To change this template use File | Settings | File Templates.
+ * =============================================================
+ * 所有transactionManager相关操作均抽象到代理中；
+ *
+ */
 public class BareBankServiceTest extends BankFixture {
     @Test
     public void transferSuccess() throws SQLException {
-        TransactionEnabledProxyManager transactionEnabledProxyManager = new TransactionEnabledProxyManager(new TransactionManager(dataSource));
-        Object bankService = new BareBankService(dataSource);
-        BankService proxyBankService = (BankService) transactionEnabledProxyManager.proxyFor(bankService);
+        TransactionManager transactionManager = new TransactionManager(dataSource);
+        ProxyEnabledTransactionManager proxyEnabledTransactionManager = new ProxyEnabledTransactionManager(transactionManager);
+        BareBankService bankService = new BareBankService(dataSource);
+        BankService proxyBankService = (BankService) proxyEnabledTransactionManager.proxyFor(bankService);
         proxyBankService.transfer(1111, 2222, 200);
 
         assertEquals(800, getBankAmount(1111));
@@ -24,9 +34,9 @@ public class BareBankServiceTest extends BankFixture {
 
     @Test
     public void transferFailure() throws SQLException {
-        TransactionEnabledProxyManager transactionEnabledProxyManager = new TransactionEnabledProxyManager(new TransactionManager(dataSource));
+        ProxyEnabledTransactionManager proxyEnabledTransactionManager = new ProxyEnabledTransactionManager(new TransactionManager(dataSource));
         Object bankService = new BareBankService(dataSource);
-        BankService proxyBankService = (BankService) transactionEnabledProxyManager.proxyFor(bankService);
+        BankService proxyBankService = (BankService) proxyEnabledTransactionManager.proxyFor(bankService);
 
         int toNonExistId = 3333;
         proxyBankService.transfer(1111, toNonExistId, 200);

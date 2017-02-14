@@ -6,11 +6,10 @@ import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 
-public class TransactionEnabledProxyManager {
+public class ProxyEnabledTransactionManager {
     private TransactionManager transactionManager;
 
-    public TransactionEnabledProxyManager(TransactionManager transactionManager) {
-
+    public ProxyEnabledTransactionManager(TransactionManager transactionManager) {
         this.transactionManager = transactionManager;
     }
 
@@ -29,8 +28,9 @@ class TransactionInvocationHandler implements InvocationHandler {
     }
 
     public Object invoke(Object o, Method method, Object[] objects) throws Throwable {
-        transactionManager.start();
         Object result = null;
+
+        transactionManager.start();
         try {
             result = method.invoke(proxy, objects);
             transactionManager.commit();

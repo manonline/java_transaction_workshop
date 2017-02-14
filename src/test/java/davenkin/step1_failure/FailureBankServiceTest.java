@@ -13,6 +13,10 @@ import static junit.framework.Assert.assertEquals;
  * Date: 2/5/13
  * Time: 10:08 PM
  * To change this template use File | Settings | File Templates.
+ * =========================================================================================================
+ * 每一个需要用到数据源的方法，均自己去获取Connection(因此也就需要给他们传入DataSource)。所以即使加入了所谓的事务控制，
+ * 也不能达到效果，其实可以在Service层中给DAO对象传入dataSource；
+ * =========================================================================================================
  */
 public class FailureBankServiceTest extends BankFixture {
     @Test
